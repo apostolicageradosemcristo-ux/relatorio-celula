@@ -3,47 +3,96 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#0e7490"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Relatório de Célula"/>
+<meta name="description" content="Relatório de Célula — Igreja Apostólica Gerados em Cristo"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="icon.png"/>
 <title>Relatório de Célula</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f4f4; color: #1a1a1a; padding: 1rem; }
-  h1 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
-  .sub { font-size: 13px; color: #888; margin-bottom: 20px; }
-  .card { background: #fff; border-radius: 12px; border: 1px solid #e5e5e5; padding: 16px; margin-bottom: 12px; }
-  .section-title { font-size: 11px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
-  label { font-size: 13px; font-weight: 500; color: #555; display: block; margin-bottom: 5px; }
-  input, select, textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 15px; font-family: inherit; background: #fff; color: #1a1a1a; outline: none; margin-bottom: 12px; }
-  input:focus, select:focus, textarea:focus { border-color: #2563eb; }
-  textarea { resize: vertical; }
-  .row { display: flex; gap: 8px; align-items: flex-start; }
-  .row .fields { flex: 1; }
-  .btn-remove { background: none; border: none; color: #e74c3c; font-size: 20px; cursor: pointer; padding: 8px 4px; line-height: 1; }
-  .btn-add { width: 100%; padding: 9px; border-radius: 8px; border: 1px dashed #ccc; background: none; font-size: 13px; color: #888; cursor: pointer; margin-top: 4px; }
-  .btn-add:hover { background: #f9f9f9; }
-  .btn-enviar { width: 100%; padding: 15px; border-radius: 10px; background: #25D366; border: none; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 8px; margin-bottom: 32px; }
-  .btn-enviar:hover { background: #1ebe5a; }
-  .erro { font-size: 12px; color: #e74c3c; margin-top: -8px; margin-bottom: 8px; }
-  .sucesso { text-align: center; padding: 3rem 1rem; }
-  .sucesso .icon { font-size: 52px; margin-bottom: 16px; }
-  .sucesso h2 { font-size: 20px; margin-bottom: 8px; }
-  .sucesso p { font-size: 14px; color: #888; margin-bottom: 24px; }
-  .btn-novo { padding: 10px 24px; border-radius: 8px; border: 1px solid #ddd; background: #f4f4f4; font-size: 14px; cursor: pointer; }
-  .required { color: #e74c3c; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f9ff;color:#0c2a35;min-height:100vh}
+.header{background:linear-gradient(135deg,#0e7490,#0891b2);padding:24px 20px 32px;color:#fff;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;bottom:-20px;left:0;right:0;height:40px;background:#f0f9ff;border-radius:50% 50% 0 0/100% 100% 0 0}
+.header-icon{width:52px;height:52px;background:rgba(255,255,255,0.2);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px}
+.header h1{font-size:20px;font-weight:700;margin-bottom:4px}
+.header p{font-size:13px;opacity:0.85}
+.content{padding:12px 16px 32px}
+.card{background:#fff;border-radius:16px;padding:18px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.section-title{font-size:11px;font-weight:700;color:#0e7490;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.section-title::before{content:'';display:inline-block;width:3px;height:14px;background:#0e7490;border-radius:2px}
+label{font-size:13px;font-weight:500;color:#374151;display:block;margin-bottom:5px}
+input,select,textarea{width:100%;padding:11px 13px;border-radius:10px;border:1.5px solid #e2e8f0;font-size:15px;font-family:inherit;background:#f8fafc;color:#0c2a35;outline:none;margin-bottom:12px;transition:border-color 0.2s}
+input:focus,select:focus,textarea:focus{border-color:#0e7490;background:#fff}
+textarea{resize:vertical}
+.field-group{margin-bottom:4px}
+.row{display:flex;gap:8px;align-items:flex-start}
+.row .fields{flex:1}
+.btn-remove{background:none;border:none;color:#f87171;font-size:22px;cursor:pointer;padding:8px 2px;line-height:1;margin-top:0}
+.btn-add{width:100%;padding:10px;border-radius:10px;border:1.5px dashed #bae6fd;background:#f0f9ff;font-size:13px;color:#0e7490;cursor:pointer;margin-top:2px;font-weight:500}
+.btn-add:active{background:#e0f2fe}
+.btn-enviar{width:100%;padding:16px;border-radius:14px;background:linear-gradient(135deg,#0e7490,#0891b2);border:none;color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-top:8px;margin-bottom:8px;letter-spacing:0.01em;box-shadow:0 4px 14px rgba(14,116,144,0.35)}
+.btn-enviar:active{transform:scale(0.98)}
+.erro{font-size:12px;color:#ef4444;margin-top:-8px;margin-bottom:8px}
+.badge-req{color:#ef4444;margin-left:2px}
+.foto-status{font-size:13px;color:#94a3b8;margin-top:-6px;margin-bottom:10px}
+.foto-status.ok{color:#0e7490;font-weight:500}
+.foto-preview{width:100%;border-radius:10px;margin-top:6px;margin-bottom:8px}
+.divider{text-align:center;font-size:12px;color:#94a3b8;margin:8px 0 12px;position:relative}
+.divider::before,.divider::after{content:'';position:absolute;top:50%;width:38%;height:1px;background:#e2e8f0}
+.divider::before{left:0}.divider::after{right:0}
+
+/* Tela de sucesso */
+.sucesso{text-align:center;padding:3rem 1.5rem}
+.sucesso-icon{width:80px;height:80px;background:linear-gradient(135deg,#0e7490,#0891b2);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 20px}
+.sucesso h2{font-size:22px;font-weight:700;margin-bottom:8px;color:#0c2a35}
+.sucesso p{font-size:14px;color:#64748b;margin-bottom:28px;line-height:1.6}
+.btn-novo{padding:12px 28px;border-radius:12px;border:1.5px solid #bae6fd;background:#f0f9ff;font-size:15px;color:#0e7490;cursor:pointer;font-weight:600}
+
+/* Install banner */
+.install-bar{background:#0e7490;color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.install-bar p{font-size:13px;line-height:1.4}
+.install-bar strong{display:block;font-size:14px}
+.btn-install{background:#fff;color:#0e7490;border:none;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn-dismiss{background:none;border:none;color:rgba(255,255,255,0.7);font-size:20px;cursor:pointer;padding:0 4px}
 </style>
 </head>
 <body>
+
+<div id="install-bar" style="display:none" class="install-bar">
+  <p><strong>📲 Adicionar à tela inicial</strong>Acesso rápido como um app</p>
+  <button class="btn-install" id="btn-install">Instalar</button>
+  <button class="btn-dismiss" onclick="document.getElementById('install-bar').style.display='none'">×</button>
+</div>
 
 <div id="app"></div>
 
 <script>
 const NUMERO_BISPO = "5511943207322";
+const IMGUR_CLIENT_ID = "546c25a59c58ad7";
+
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('install-bar').style.display = 'flex';
+});
+document.getElementById('btn-install')?.addEventListener('click', () => {
+  if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; }
+  document.getElementById('install-bar').style.display = 'none';
+});
 
 const state = {
-  lider: "", data: "", tema: "", presentes: "",
-  visitantes: [{ nome: "", contato: "" }],
-  consolidacoes: [{ nome: "" }],
-  discipulo2g: "", observacoes: "",
-  enviado: false, erros: {}
+  lider:"", data:"", tema:"", presentes:"",
+  visitantes:[{nome:"",contato:""}],
+  consolidacoes:[{nome:"",assunto:""}],
+  decisoes:[{nome:"",tipo:""}],
+    oracao15:[{nome:"",resultado:""}],
+  discipulo2g:"", observacoes:"",
+  fotoLink:"", fotoUploadLink:"", fotoEnviando:false,
+  enviado:false, erros:{}
 };
 
 function render() {
@@ -51,7 +100,7 @@ function render() {
   if (state.enviado) {
     app.innerHTML = `
       <div class="sucesso">
-        <div class="icon">✅</div>
+        <div class="sucesso-icon">✅</div>
         <h2>Relatório enviado!</h2>
         <p>O relatório de <strong>${state.lider}</strong> referente a <strong>${state.data}</strong> foi registrado com sucesso.</p>
         <button class="btn-novo" onclick="resetar()">Novo relatório</button>
@@ -60,110 +109,190 @@ function render() {
   }
 
   app.innerHTML = `
-    <h1>Relatório de célula</h1>
-    <p class="sub">Equipe de Doze — Igreja Apostólica Gerados em Cristo</p>
-
-    <div class="card">
-      <p class="section-title">Identificação</p>
-      <label>Líder responsável <span class="required">*</span></label>
-      <input id="lider" value="${state.lider}" placeholder="Nome do líder" oninput="state.lider=this.value"/>
-      ${state.erros.lider ? '<p class="erro">Campo obrigatório</p>' : ''}
-      <label>Data da célula <span class="required">*</span></label>
-      <input id="data" type="date" value="${state.data}" oninput="state.data=this.value"/>
-      ${state.erros.data ? '<p class="erro">Campo obrigatório</p>' : ''}
+    <div class="header">
+      <div class="header-icon">📋</div>
+      <h1>Relatório de Célula</h1>
+      <p>Igreja Apostólica Gerados em Cristo</p>
     </div>
 
-    <div class="card">
-      <p class="section-title">Reunião</p>
-      <label>Tema ministrado <span class="required">*</span></label>
-      <textarea id="tema" rows="2" placeholder="Descreva o tema ou texto base da célula..." oninput="state.tema=this.value">${state.tema}</textarea>
-      ${state.erros.tema ? '<p class="erro">Campo obrigatório</p>' : ''}
-      <label>Total de presentes <span class="required">*</span></label>
-      <input id="presentes" type="number" min="0" value="${state.presentes}" placeholder="0" oninput="state.presentes=this.value" style="width:100px"/>
-      ${state.erros.presentes ? '<p class="erro">Campo obrigatório</p>' : ''}
-    </div>
+    <div class="content">
 
-    <div class="card">
-      <p class="section-title">Visitantes recebidos</p>
-      ${state.visitantes.map((v, i) => `
-        <div class="row">
-          <div class="fields">
-            <input placeholder="Nome do visitante" value="${v.nome}" oninput="updateList('visitantes',${i},'nome',this.value)"/>
-            <input placeholder="Contato (opcional)" value="${v.contato}" oninput="updateList('visitantes',${i},'contato',this.value)"/>
-          </div>
-          ${state.visitantes.length > 1 ? `<button class="btn-remove" onclick="removeItem('visitantes',${i})">×</button>` : ''}
-        </div>`).join('')}
-      <button class="btn-add" onclick="addItem('visitantes',{nome:'',contato:''})">+ Adicionar visitante</button>
-    </div>
+      <div class="card">
+        <p class="section-title">Identificação</p>
+        <div class="field-group">
+          <label>Líder responsável <span class="badge-req">*</span></label>
+          <input id="lider" value="${state.lider}" placeholder="Nome do líder" oninput="state.lider=this.value"/>
+          ${state.erros.lider ? '<p class="erro">Campo obrigatório</p>' : ''}
+        </div>
+        <div class="field-group">
+          <label>Data da célula <span class="badge-req">*</span></label>
+          <input id="data" type="date" value="${state.data}" oninput="state.data=this.value"/>
+          ${state.erros.data ? '<p class="erro">Campo obrigatório</p>' : ''}
+        </div>
+      </div>
 
-    <div class="card">
-      <p class="section-title">Consolidações da semana</p>
-      <p style="font-size:12px;color:#aaa;margin-bottom:10px">Pessoas que tomaram decisão ou foram integradas à igreja nesta semana.</p>
-      ${state.consolidacoes.map((c, i) => `
-        <div class="row">
-          <div class="fields">
-            <input placeholder="Nome da pessoa consolidada" value="${c.nome}" oninput="updateList('consolidacoes',${i},'nome',this.value)"/>
-          </div>
-          ${state.consolidacoes.length > 1 ? `<button class="btn-remove" onclick="removeItem('consolidacoes',${i})">×</button>` : ''}
-        </div>`).join('')}
-      <button class="btn-add" onclick="addItem('consolidacoes',{nome:''})">+ Adicionar consolidação</button>
-    </div>
+      <div class="card">
+        <p class="section-title">Reunião</p>
+        <div class="field-group">
+          <label>Tema ministrado <span class="badge-req">*</span></label>
+          <textarea rows="2" placeholder="Descreva o tema ou texto base da célula..." oninput="state.tema=this.value">${state.tema}</textarea>
+          ${state.erros.tema ? '<p class="erro">Campo obrigatório</p>' : ''}
+        </div>
+        <div class="field-group">
+          <label>Total de presentes <span class="badge-req">*</span></label>
+          <input type="number" min="0" value="${state.presentes}" placeholder="0" oninput="state.presentes=this.value" style="width:110px"/>
+          ${state.erros.presentes ? '<p class="erro">Campo obrigatório</p>' : ''}
+        </div>
+      </div>
 
-    <div class="card">
-      <p class="section-title">Discípulo em desenvolvimento — 2ª geração</p>
-      <p style="font-size:12px;color:#aaa;margin-bottom:10px">Quem você está observando e preparando para assumir liderança?</p>
-      <input placeholder="Nome do discípulo" value="${state.discipulo2g}" oninput="state.discipulo2g=this.value"/>
-    </div>
+      <div class="card">
+        <p class="section-title">Visitantes recebidos</p>
+        ${state.visitantes.map((v,i) => `
+          <div class="row">
+            <div class="fields">
+              <input placeholder="Nome do visitante" value="${v.nome}" oninput="updateList('visitantes',${i},'nome',this.value)"/>
+              <input placeholder="Contato (opcional)" value="${v.contato}" oninput="updateList('visitantes',${i},'contato',this.value)"/>
+            </div>
+            ${state.visitantes.length > 1 ? `<button class="btn-remove" onclick="removeItem('visitantes',${i})">×</button>` : ''}
+          </div>`).join('')}
+        <button class="btn-add" onclick="addItem('visitantes',{nome:'',contato:''})">+ Adicionar visitante</button>
+      </div>
 
-    <div class="card">
-      <p class="section-title">Observações gerais</p>
-      <textarea rows="3" placeholder="Informações adicionais, pedidos de oração, situações pastorais..." oninput="state.observacoes=this.value">${state.observacoes}</textarea>
-    </div>
+      <div class="card">
+        <p class="section-title">Consolidações da semana</p>
+        <p style="font-size:12px;color:#94a3b8;margin-bottom:10px">Quem foi consolidado esta semana? Informe o nome e o assunto abordado no encontro.</p>
+        ${state.consolidacoes.map((c,i) => `
+          <div class="row">
+            <div class="fields">
+              <input placeholder="Nome do discípulo" value="${c.nome}" oninput="updateList('consolidacoes',${i},'nome',this.value)"/>
+              <input placeholder="Assunto abordado no encontro" value="${c.assunto||''}" oninput="updateList('consolidacoes',${i},'assunto',this.value)"/>
+            </div>
+            ${state.consolidacoes.length > 1 ? `<button class="btn-remove" onclick="removeItem('consolidacoes',${i})">×</button>` : ''}
+          </div>`).join('')}
+        <button class="btn-add" onclick="addItem('consolidacoes',{nome:'',assunto:''})">+ Adicionar consolidação</button>
+      </div>
 
-    <button class="btn-enviar" onclick="enviar()">📲 Enviar relatório no WhatsApp</button>
+      <div class="card">
+        <p class="section-title">Decisões pela fé</p>
+        <p style="font-size:12px;color:#94a3b8;margin-bottom:10px">Alguém aceitou Jesus ou renovou o compromisso com Cristo nesta semana?</p>
+        ${state.decisoes.map((d,i) => `
+          <div class="row">
+            <div class="fields">
+              <input placeholder="Nome da pessoa" value="${d.nome}" oninput="updateList('decisoes',${i},'nome',this.value)"/>
+              <select oninput="updateList('decisoes',${i},'tipo',this.value)">
+                <option value="" ${!d.tipo?'selected':''}>Qual foi a decisão?</option>
+                <option value="Aceitou Jesus pela primeira vez" ${d.tipo==='Aceitou Jesus pela primeira vez'?'selected':''}>Aceitou Jesus pela primeira vez</option>
+                <option value="Renovou o compromisso com Cristo" ${d.tipo==='Renovou o compromisso com Cristo'?'selected':''}>Renovou o compromisso com Cristo</option>
+                <option value="Voltou para a igreja" ${d.tipo==='Voltou para a igreja'?'selected':''}>Voltou para a igreja</option>
+              </select>
+            </div>
+            ${state.decisoes.length > 1 ? `<button class="btn-remove" onclick="removeItem('decisoes',${i})">×</button>` : ''}
+          </div>`).join('')}
+        <button class="btn-add" onclick="addItem('decisoes',{nome:'',tipo:''})">+ Adicionar decisão</button>
+      </div>
+
+      <div class="card">
+        <p class="section-title">Oração estratégica — 15 dias</p>
+        <p style="font-size:12px;color:#94a3b8;margin-bottom:10px">Liste até 5 pessoas pelas quais você tem orado e feito o convite neste ciclo de 15 dias. Informe o resultado de cada uma.</p>
+        ${state.oracao15.map((o,i) => `
+          <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #f0f9ff">
+            <p style="font-size:12px;font-weight:600;color:#0e7490;margin-bottom:8px">Pessoa ${i+1}</p>
+            <input placeholder="Nome da pessoa" value="${o.nome}" oninput="updateList('oracao15',${i},'nome',this.value)"/>
+            <select oninput="updateList('oracao15',${i},'resultado',this.value)">
+              <option value="" ${!o.resultado?'selected':''}>Resultado</option>
+              <option value="Veio à célula" ${o.resultado==='Veio à célula'?'selected':''}>Veio à célula</option>
+              <option value="Veio ao culto" ${o.resultado==='Veio ao culto'?'selected':''}>Veio ao culto</option>
+              <option value="Veio à célula e ao culto" ${o.resultado==='Veio à célula e ao culto'?'selected':''}>Veio à célula e ao culto</option>
+              <option value="Ainda não respondeu ao convite" ${o.resultado==='Ainda não respondeu ao convite'?'selected':''}>Ainda não respondeu ao convite</option>
+            </select>
+          </div>`).join('')}
+        ${state.oracao15.length < 5 ? `<button class="btn-add" onclick="addOracao()">+ Adicionar pessoa</button>` : ''}
+      </div>
+        <p style="font-size:12px;color:#94a3b8;margin-bottom:10px">Quem você está observando e preparando para assumir liderança?</p>
+        <input placeholder="Nome do discípulo" value="${state.discipulo2g}" oninput="state.discipulo2g=this.value"/>
+      </div>
+
+      <div class="card">
+        <p class="section-title">Foto da célula</p>
+        <label>Enviar foto do celular</label>
+        <input type="file" accept="image/*" onchange="uploadFoto(this)" style="margin-bottom:6px"/>
+        <p class="foto-status ${state.fotoUploadLink ? 'ok' : ''}">${state.fotoEnviando ? '⏳ Enviando foto...' : state.fotoUploadLink ? '✅ Foto enviada com sucesso!' : ''}</p>
+        ${state.fotoUploadLink ? `<img class="foto-preview" src="${state.fotoUploadLink}"/>` : ''}
+        <div class="divider">ou</div>
+        <label>Cole um link de foto</label>
+        <input placeholder="https://..." value="${state.fotoLink}" oninput="state.fotoLink=this.value"/>
+      </div>
+
+      <div class="card">
+        <p class="section-title">Observações gerais</p>
+        <textarea rows="3" placeholder="Informações adicionais, pedidos de oração, situações pastorais..." oninput="state.observacoes=this.value">${state.observacoes}</textarea>
+      </div>
+
+      <button class="btn-enviar" onclick="enviar()">📲 Enviar relatório no WhatsApp</button>
+
+    </div>
   `;
 }
 
-function updateList(list, idx, key, val) {
-  state[list][idx][key] = val;
-}
-
-function addItem(list, empty) {
-  state[list].push(empty);
+async function uploadFoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  state.fotoEnviando = true;
+  state.fotoUploadLink = "";
+  render();
+  const formData = new FormData();
+  formData.append("image", file);
+  try {
+    const res = await fetch("https://api.imgur.com/3/image", {
+      method:"POST",
+      headers:{Authorization:`Client-ID ${IMGUR_CLIENT_ID}`},
+      body:formData
+    });
+    const data = await res.json();
+    state.fotoUploadLink = data.success ? data.data.link : "";
+    if (!data.success) alert("Erro ao enviar foto. Use o campo de link.");
+  } catch { alert("Erro de conexão ao enviar foto."); }
+  state.fotoEnviando = false;
   render();
 }
 
-function removeItem(list, idx) {
-  state[list].splice(idx, 1);
-  render();
-}
+function addOracao(){ if(state.oracao15.length<5){ state.oracao15.push({nome:"",resultado:""}); render(); } }
+function updateList(list,idx,key,val){ state[list][idx][key]=val; }
+function addItem(list,empty){ state[list].push(empty); render(); }
+function removeItem(list,idx){ state[list].splice(idx,1); render(); }
 
 function resetar() {
-  Object.assign(state, {
-    lider:"", data:"", tema:"", presentes:"",
+  Object.assign(state,{
+    lider:"",data:"",tema:"",presentes:"",
     visitantes:[{nome:"",contato:""}],
-    consolidacoes:[{nome:""}],
-    discipulo2g:"", observacoes:"", enviado:false, erros:{}
+    consolidacoes:[{nome:"",assunto:""}],
+    decisoes:[{nome:"",tipo:""}],
+    discipulo2g:"",observacoes:"",
+    fotoLink:"",fotoUploadLink:"",fotoEnviando:false,
+    enviado:false,erros:{}
   });
   render();
 }
 
 function enviar() {
-  const e = {};
-  if (!state.lider.trim()) e.lider = true;
-  if (!state.data) e.data = true;
-  if (!state.tema.trim()) e.tema = true;
-  if (!state.presentes) e.presentes = true;
-  state.erros = e;
-  if (Object.keys(e).length) { render(); return; }
+  const e={};
+  if (!state.lider.trim()) e.lider=true;
+  if (!state.data) e.data=true;
+  if (!state.tema.trim()) e.tema=true;
+  if (!state.presentes) e.presentes=true;
+  state.erros=e;
+  if (Object.keys(e).length){ render(); return; }
 
-  const visitantesTexto = state.visitantes.filter(v => v.nome.trim())
-    .map((v, i) => `  ${i+1}. ${v.nome}${v.contato ? ` — ${v.contato}` : ""}`).join("\n") || "  Nenhum visitante";
+  const visitantesTexto = state.visitantes.filter(v=>v.nome.trim())
+    .map((v,i)=>`  ${i+1}. ${v.nome}${v.contato?` — ${v.contato}`:""}`).join("\n") || "  Nenhum visitante";
+  const consolidacoesTexto = state.consolidacoes.filter(c=>c.nome.trim())
+    .map((c,i)=>`  ${i+1}. ${c.nome}${c.assunto?` — ${c.assunto}`:""}`).join("\n") || "  Nenhuma consolidação";
+  const decisoesTexto = state.decisoes.filter(d=>d.nome.trim())
+    .map((d,i)=>`  ${i+1}. ${d.nome}${d.tipo?` — ${d.tipo}`:""}`).join("\n") || "  Nenhuma decisão registrada";
+  const oracao15Texto = state.oracao15.filter(o=>o.nome.trim())
+    .map((o,i)=>`  ${i+1}. ${o.nome} — ${o.resultado||"Sem resultado informado"}`).join("\n") || "  Nenhuma pessoa informada";
 
-  const consolidacoesTexto = state.consolidacoes.filter(c => c.nome.trim())
-    .map((c, i) => `  ${i+1}. ${c.nome}`).join("\n") || "  Nenhuma consolidação";
-
-  const msg = `📋 *RELATÓRIO DE CÉLULA*
+  const msg=`📋 *RELATÓRIO DE CÉLULA*
 _Igreja Apostólica Gerados em Cristo_
 
 👤 *Líder:* ${state.lider}
@@ -180,19 +309,34 @@ ${visitantesTexto}
 ✅ *Consolidações da semana:*
 ${consolidacoesTexto}
 
+🙏 *Decisões pela fé:*
+${decisoesTexto}
+
+🎯 *Oração estratégica — 15 dias:*
+${oracao15Texto}
+
 🌱 *Discípulo em desenvolvimento (2ª geração):*
-  ${state.discipulo2g || "Não informado"}
+  ${state.discipulo2g||"Não informado"}
 
 📝 *Observações gerais:*
-  ${state.observacoes || "Nenhuma"}`;
+  ${state.observacoes||"Nenhuma"}
 
-  const url = `https://wa.me/${NUMERO_BISPO}?text=${encodeURIComponent(msg)}`;
-  window.location.href = url;
-  state.enviado = true;
+🖼️ *Foto da célula:*
+  ${fotoTexto}`;
+
+  const url=`https://wa.me/${NUMERO_BISPO}?text=${encodeURIComponent(msg)}`;
+  const a=document.createElement("a");
+  a.href=url; a.target="_blank"; a.rel="noopener noreferrer";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  state.enviado=true;
   render();
 }
 
 render();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
 </script>
 </body>
 </html>

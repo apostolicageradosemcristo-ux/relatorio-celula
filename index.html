@@ -92,7 +92,7 @@ const state = {
     oracao15:[{nome:"",resultado:""}],
   discipulo2g:"", observacoes:"",
   fotoLink:"", fotoUploadLink:"", fotoEnviando:false,
-  enviado:false, erros:{}
+  whatsappUrl:"", enviado:false, erros:{}
 };
 
 function render() {
@@ -101,8 +101,9 @@ function render() {
     app.innerHTML = `
       <div class="sucesso">
         <div class="sucesso-icon">✅</div>
-        <h2>Relatório enviado!</h2>
-        <p>O relatório de <strong>${state.lider}</strong> referente a <strong>${state.data}</strong> foi registrado com sucesso.</p>
+        <h2>Relatório pronto!</h2>
+        <p>O relatório de <strong>${state.lider}</strong> referente a <strong>${state.data}</strong> está pronto para envio.</p>
+        <a href="${state.whatsappUrl}" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;padding:16px;border-radius:14px;background:linear-gradient(135deg,#25D366,#1ebe5a);color:#fff;font-size:16px;font-weight:700;text-align:center;text-decoration:none;margin-bottom:16px;box-sizing:border-box">📲 Enviar no WhatsApp</a>
         <button class="btn-novo" onclick="resetar()">Novo relatório</button>
       </div>`;
     return;
@@ -325,9 +326,7 @@ ${oracao15Texto}
   ${fotoTexto}`;
 
   const url=`https://wa.me/${NUMERO_BISPO}?text=${encodeURIComponent(msg)}`;
-  const a=document.createElement("a");
-  a.href=url; a.target="_blank"; a.rel="noopener noreferrer";
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  state.whatsappUrl = url;
   state.enviado=true;
   render();
 }
@@ -338,3 +337,5 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 </script>
+</body>
+</html>

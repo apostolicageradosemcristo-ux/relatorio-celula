@@ -1,0 +1,21 @@
+{
+  "name": "Relatório de Célula",
+  "short_name": "Rel. Célula",
+  "description": "Igreja Apostólica Gerados em Cristo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0f9ff",
+  "theme_color": "#0e7490",
+  "icons": [
+    {
+      "src": "https://api.iconify.design/twemoji:clipboard.svg?width=192&height=192",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "https://api.iconify.design/twemoji:clipboard.svg?width=512&height=512",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
